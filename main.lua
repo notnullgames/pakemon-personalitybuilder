@@ -10,11 +10,11 @@ image:setFilter('nearest', 'nearest')
 local g = anim8.newGrid(32, 32, image:getWidth(), image:getHeight())
 
 local animations = {
-    { "lazy", anim8.newAnimation(g('1-6', 1), speed) },
-    { "sleepy", anim8.newAnimation(g('1-6', 2), speed) },
+    { "happy", anim8.newAnimation(g('1-6', 1), speed) },
+    { "excited", anim8.newAnimation(g('1-6', 2), speed) },
     { "curious", anim8.newAnimation(g('1-6', 3), speed) },
-    { "happy",  anim8.newAnimation(g('1-6', 4), speed) },
-    { "excited",  anim8.newAnimation(g('1-6', 5), speed) },
+    { "lazy",  anim8.newAnimation(g('1-6', 4), speed) },
+    { "sleepy",  anim8.newAnimation(g('1-6', 5), speed) },
     { "sad",  anim8.newAnimation(g('1-6', 6), speed) }
 }
 
@@ -30,9 +30,9 @@ function love.draw()
     love.graphics.setColor(1, 1, 1, 0.8)
     for i, dmood in pairs(animations) do
         if mood == i then
-            love.graphics.print("•", 720, i*20)
+            love.graphics.print("•", 620, i*20)
         end
-        love.graphics.print(dmood[1], 730, i*20)
+        love.graphics.print(dmood[1], 630, i*20)
     end
     love.graphics.scale(20,20)
     animations[mood][2]:draw(image, x, y)
