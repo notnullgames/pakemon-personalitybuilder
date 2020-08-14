@@ -1,0 +1,74 @@
+<style>
+    canvas {
+        border: 1px solid #000;
+        position: absolute;
+        left:0;
+        top:0;
+    }
+    #indicator {
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        left:0;
+        top:0;
+        border: 1px solid red;
+    }
+    p {
+        margin-top: 200px;
+    }
+</style>
+
+<canvas height="190" width="190" id="out"></canvas>
+<div id="indicator"></div>
+
+<p>
+    Click on the image to add a frame, shift-click to move back. Right click on the canvas and choose "save image as..." when you're done.
+</p>
+
+<img src="neko.png" id="img" width="1024" />
+
+
+
+<script>
+const ctx = document.getElementById('out').getContext("2d");
+const img = document.getElementById('img')
+const mood = document.getElementById('mood')
+const indicator = document.getElementById('indicator')
+
+const moods = ["happy","excited", "curious", "lazy", "sleepy", "sad"]
+const animations = moods.map(mood => {
+    mood.innerHTML += `<input type="radio" name="mood" value="${mood}" checked \>`
+    return []
+})
+
+let currentX = 0
+let currentY = 0
+img.onclick = e => {
+    if (e.shiftKey) {
+        currentX--
+        if (currentX < 0){
+            currentX = 5
+            currentY--
+            if (currentY < 0){
+                currentY = 5
+            }
+        }
+    } else {
+        const x = (e.offsetX / 32)/2 | 0
+        const y = (e.offsetY / 32)/2 | 0
+        ctx.drawImage(img, x*32, y*32, 32, 32, currentX*32, currentY * 32, 32, 32)
+        currentX++
+        if (currentX > 5){
+            currentX = 0
+            currentY++
+            if (currentY > 5){
+                currentY = 0
+            }
+        }
+    }
+    indicator.style.left = 32 * currentX
+    indicator.style.top = 32 * currentY
+}
+
+</script>
+
