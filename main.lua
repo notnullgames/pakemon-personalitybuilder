@@ -5,14 +5,14 @@ local mood = 1
 local speed = 0.5
 
 -- setup: outside of load() so lurker weill pick it up
-local image = love.graphics.newImage("hackercat.png")
+local image = love.graphics.newImage("gally.png")
 image:setFilter('nearest', 'nearest')
 local g = anim8.newGrid(32, 32, image:getWidth(), image:getHeight())
 
 local animations = {
-    { "lazy", anim8.newAnimation(g('1-4', 1), speed) },
-    { "sleepy", anim8.newAnimation(g('1-2', 2), speed) },
-    { "curious", anim8.newAnimation(g('1-5', 3), speed) },
+    { "lazy", anim8.newAnimation(g('1-6', 1), speed) },
+    { "sleepy", anim8.newAnimation(g('1-6', 2), speed) },
+    { "curious", anim8.newAnimation(g('1-6', 3), speed) },
     { "happy",  anim8.newAnimation(g('1-6', 4), speed) },
     { "excited",  anim8.newAnimation(g('1-6', 5), speed) },
     { "sad",  anim8.newAnimation(g('1-6', 6), speed) }
