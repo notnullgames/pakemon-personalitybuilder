@@ -13,44 +13,49 @@
         top:0;
         border: 1px solid red;
     }
-    p {
-        margin-top: 200px;
+    #container {
+        position: relative;
     }
 </style>
 
-<canvas height="190" width="190" id="out"></canvas>
-<div id="indicator"></div>
-
-<p>
-    Click on the image to add a frame, shift-click to move back. Right click on the canvas and choose "save image as..." when you're done.
-</p>
+<p>Click on the image to add a frame, shift-click to move back. Right click on the canvas and choose "save image as..." when you're done.</p>
 
 <img src="neko.png" id="img" width="1024" />
 
-
+<div id="container">
+    <canvas id="out"></canvas>
+    <div id="indicator"></div>
+    </div>
 
 <script>
-const ctx = document.getElementById('out').getContext("2d");
+const out = document.getElementById('out')
 const img = document.getElementById('img')
-const mood = document.getElementById('mood')
 const indicator = document.getElementById('indicator')
-
 const moods = ["happy","excited", "curious", "lazy", "sleepy", "sad"]
+
 const animations = moods.map(mood => {
     mood.innerHTML += `<input type="radio" name="mood" value="${mood}" checked \>`
     return []
 })
+
+const xMax = 6
+const yMax = 6
+
+out.height = yMax*32
+out.width = xMax*32
+
+const ctx = out.getContext("2d")
 
 let currentX = 0
 let currentY = 0
 img.onclick = e => {
     if (e.shiftKey) {
         currentX--
-        if (currentX < 0){
-            currentX = 5
+        if (currentX < 0) {
+            currentX = xMax-1
             currentY--
-            if (currentY < 0){
-                currentY = 5
+            if (currentY < 0) {
+                currentY = yMax-1
             }
         }
     } else {
@@ -59,10 +64,10 @@ img.onclick = e => {
         ctx.clearRect(currentX * 32, currentY * 32, 32, 32)
         ctx.drawImage(img, x * 32, y * 32, 32, 32, currentX * 32, currentY * 32, 32, 32)
         currentX++
-        if (currentX > 5){
+        if (currentX >= xMax) {
             currentX = 0
             currentY++
-            if (currentY > 5){
+            if (currentY >= yMax) {
                 currentY = 0
             }
         }
