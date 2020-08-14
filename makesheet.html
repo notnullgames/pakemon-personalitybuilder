@@ -56,7 +56,8 @@ img.onclick = e => {
     } else {
         const x = (e.offsetX / 32)/2 | 0
         const y = (e.offsetY / 32)/2 | 0
-        ctx.drawImage(img, x*32, y*32, 32, 32, currentX*32, currentY * 32, 32, 32)
+        ctx.clearRect(currentX * 32, currentY * 32, 32, 32)
+        ctx.drawImage(img, x * 32, y * 32, 32, 32, currentX * 32, currentY * 32, 32, 32)
         currentX++
         if (currentX > 5){
             currentX = 0
