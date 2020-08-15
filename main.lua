@@ -5,7 +5,7 @@ local mood = 1
 local speed = 0.5
 
 -- setup: outside of load() so lurker weill pick it up
-local image = love.graphics.newImage("wolfy.png")
+local image = love.graphics.newImage("test.png")
 image:setFilter('nearest', 'nearest')
 local g = anim8.newGrid(32, 32, image:getWidth(), image:getHeight())
 
